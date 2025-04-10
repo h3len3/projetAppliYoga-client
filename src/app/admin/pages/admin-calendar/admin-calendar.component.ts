@@ -33,12 +33,19 @@ export class AdminCalendarComponent {
 
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, listPlugin, timeGridPlugin],
-    initialView: 'listMonth',
+    plugins: [timeGridPlugin, dayGridPlugin],
+    //initialView: 'timeGridWeek', // ou 'timeGridDay'
+    initialView: 'dayGridMonth',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
     events: [
-      { title: 'Événement 1', date: '2025-04-08' },
-      { title: 'Événement 2', date: '2025-04-12' }
-    ]
+      { title: 'Réunion', date: '2025-04-10T10:30:00' },
+      { title: 'Pause café', date: '2025-04-10T14:00:00' },
+    ],
+
   };
 
   changeView(type: string) {
