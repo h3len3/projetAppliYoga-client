@@ -13,24 +13,19 @@ import { CommonModule } from '@angular/common';
 // fin calendar
 
 @Component({
+  selector: 'app-admin-list-event',
   imports: [CommonModule, FullCalendarModule],
-  templateUrl: './admin-calendar.component.html',
-  styleUrl: './admin-calendar.component.scss',
+  templateUrl: './admin-list-event.component.html',
+  styleUrl: './admin-list-event.component.scss',
 
-  selector: 'app-calendar',
+  //selector: 'app-calendar',
   standalone: true,
-
-  //imports: [CommonModule, FullCalendarModule],
-  // template: `
-    //<full-calendar [options]="calendarOptions"></full-calendar>
-  //`,
 
   template: `
   <full-calendar [options]="calendarOptions"></full-calendar>
 `,
 })
-export class AdminCalendarComponent {
-
+export class AdminListEventComponent {
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, listPlugin, timeGridPlugin],
@@ -44,6 +39,5 @@ export class AdminCalendarComponent {
   changeView(type: string) {
     this.calendarComponent.getApi().changeView(type)
   }
-  
 
 }
