@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 //calendar
 
-import { FullCalendarModule } from '@fullcalendar/angular';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
 import { CalendarOptions } from '@fullcalendar/core';
 
 import { CommonModule } from '@angular/common';
 
-//FullCalendarModule.registerPlugins([dayGridPlugin]);
 // fin calendar
 
 @Component({
@@ -29,13 +29,20 @@ import { CommonModule } from '@angular/common';
 `,
 })
 export class AdminCalendarComponent {
+
+  @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin, listPlugin],
+    initialView: 'listMonth',
     events: [
       { title: 'Événement 1', date: '2025-04-08' },
       { title: 'Événement 2', date: '2025-04-12' }
     ]
   };
+
+  changeView(type: string) {
+    this.calendarComponent.getApi().changeView(type)
+  }
   
 
 }

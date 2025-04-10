@@ -1,4 +1,7 @@
 <p>admin-calendar works!</p>
 
-<full-calendar [options]="calendarOptions"></full-calendar>
+<button (click)="changeView('listMonth')">List</button>
+<button (click)="changeView('dayGridMonth')">Month</button>
+
+<full-calendar #calendar [options]="calendarOptions"></full-calendar>
 
