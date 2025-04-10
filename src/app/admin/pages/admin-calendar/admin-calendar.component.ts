@@ -10,6 +10,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { CommonModule } from '@angular/common';
 
+import locale from '@fullcalendar/core/locales/fr';
+
 // fin calendar
 
 @Component({
@@ -31,26 +33,21 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminCalendarComponent {
 
-  @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
   calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin],
     //initialView: 'timeGridWeek', // ou 'timeGridDay'
     initialView: 'dayGridMonth',
+    locale,
     headerToolbar: {
-      left: 'prev,next today',
+      right: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      left: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
     events: [
       { title: 'Réunion', date: '2025-04-10T10:30:00' },
       { title: 'Pause café', date: '2025-04-10T14:00:00' },
     ],
 
-  };
-
-  changeView(type: string) {
-    this.calendarComponent.getApi().changeView(type)
-  }
-  
+  }; 
 
 }

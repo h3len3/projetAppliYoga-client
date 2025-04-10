@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Toast, ConfirmDialog, CommonModule, FullCalendarModule],
+  imports: [RouterOutlet, Toast, ConfirmDialog, CommonModule, FullCalendarModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 
