@@ -1,4 +1,4 @@
-<h1>Créer un évènement à la date du </h1>
+<h1>Créer un évènement à la date du {{date()|date: 'dd/MM/yyyy'}}</h1>
 <form method="" action="">
   <label for="title">Titre :</label>
   <input type="text" id="title" name="Title" required>
@@ -9,11 +9,11 @@
   <br><br>
 
   <label for="startDate">Date de début :</label>
-  <input type="datetime-local" id="startDate" name="StartDate" required>
+  <input type="time" id="startDate" name="StartDate" required>
   <br><br>
 
   <label for="endDate">Date de fin :</label>
-  <input type="datetime-local" id="endDate" name="EndDate" required>
+  <input type="time" id="endDate" name="EndDate" required>
   <br><br>
 
   <label for="maxSub">Nombre maximum de participants :</label>
@@ -32,11 +32,15 @@
     <legend>Lieu :</legend>
 
     <label for="">Lieu déjà enregistré :</label>
-    <input type="" id="" name=""><br><br>
+    <select type="" id="" name="">
+      @for(item of locations; track item.id) {
+        <option [value]="item.id">{{item.name}}</option>
+      }
+    </select>
     <!-- Id_PlaceEventYoga -->
 
-    <label for="">Nouveau lieu (si non existant) :</label><br>
-    <input type="" id="" name="">
+    <!-- <label for="">Nouveau lieu (si non existant) :</label><br>
+    <input type="" id="" name=""> -->
   </fieldset>
   <br>
   <button type="submit">Soumettre</button>

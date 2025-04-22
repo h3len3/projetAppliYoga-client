@@ -7,6 +7,6 @@
     </div>
 </div>
 
-<p-dialog [(visible)]="popupVisible" [style]="{ width: '50vw' }" (onHide)="popupVisible = false">
-    <app-pop-up-event></app-pop-up-event>
+    <p-dialog [(visible)]="popupVisible" [style]="{ width: '50vw' }" [maximizable]="true" (onHide)="popupVisible = false">
+    <app-pop-up-event [date]="selectedDate"></app-pop-up-event>
 </p-dialog>

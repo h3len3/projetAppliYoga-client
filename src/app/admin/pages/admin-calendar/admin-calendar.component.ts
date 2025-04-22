@@ -36,6 +36,8 @@ export class AdminCalendarComponent {
 
   popupVisible = false;
 
+  selectedDate: Date|null = null; 
+
   calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin, interactionPlugin],
     //initialView: 'timeGridWeek', // ou 'timeGridDay'
@@ -59,6 +61,8 @@ export class AdminCalendarComponent {
   }
 
   showPopup(date: Date) {
+    this.selectedDate = date;
+    console.log(this.selectedDate);
     this.popupVisible = true;
   }
 
