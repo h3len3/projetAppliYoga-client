@@ -1,40 +1,43 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 
 //calendar
 
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import { CalendarOptions } from '@fullcalendar/core';
+import { Calendar, CalendarOptions, EventSourceInput } from '@fullcalendar/core';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { CommonModule } from '@angular/common';
 
 import locale from '@fullcalendar/core/locales/fr';
+import { EventService } from '../../services/event.service';
 
 // fin calendar
 
+// pop up 
+import { PopUpEventComponent } from '../pop-up-event/pop-up-event.component';
+import { DialogModule } from 'primeng/dialog';
+
 @Component({
-  imports: [CommonModule, FullCalendarModule],
+  imports: [CommonModule, FullCalendarModule,  PopUpEventComponent, DialogModule],
   templateUrl: './admin-calendar.component.html',
   styleUrl: './admin-calendar.component.scss',
 
   selector: 'app-calendar',
   standalone: true,
-
-  //imports: [CommonModule, FullCalendarModule],
-  // template: `
-    //<full-calendar [options]="calendarOptions"></full-calendar>
-  //`,
-
-  template: `
-  <full-calendar [options]="calendarOptions"></full-calendar>
-`,
 })
 export class AdminCalendarComponent {
 
+  eventService = inject(EventService);
+
+  events!: EventSourceInput;
+
+  popupVisible = false;
+
   calendarOptions: CalendarOptions = {
-    plugins: [timeGridPlugin, dayGridPlugin],
+    plugins: [timeGridPlugin, dayGridPlugin, interactionPlugin],
     //initialView: 'timeGridWeek', // ou 'timeGridDay'
     initialView: 'dayGridMonth',
     locale,
@@ -43,11 +46,26 @@ export class AdminCalendarComponent {
       center: 'title',
       left: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
-    events: [
-      { title: 'Réunion', date: '2025-04-10T10:30:00' },
-      { title: 'Pause café', date: '2025-04-10T14:00:00' },
-    ],
-
+    dateClick: (info) => this.showPopup(info.date),
+    eventClick: (ev) => console.log(ev)
   }; 
+
+  constructor() {
+    this.eventService.get().subscribe(data => this.events = data.map(e => ({
+      start: new Date(e.startDate),
+      end: new Date(e.endDate),
+      title: `${e.title} (${e.description})`,
+    })))
+  }
+
+  showPopup(date: Date) {
+    this.popupVisible = true;
+  }
+
+  // test(date: Date) {
+  //   this.dialog.open(PopUpEventComponent, {
+  //     data: { date }
+  //   });
+  // }
 
 }

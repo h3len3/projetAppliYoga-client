@@ -1,0 +1,43 @@
+<h1>Créer un évènement à la date du </h1>
+<form method="" action="">
+  <label for="title">Titre :</label>
+  <input type="text" id="title" name="Title" required>
+  <br><br>
+
+  <label for="description">Description :</label><br>
+  <textarea id="description" name="Description" rows="4" cols="50" required></textarea>
+  <br><br>
+
+  <label for="startDate">Date de début :</label>
+  <input type="datetime-local" id="startDate" name="StartDate" required>
+  <br><br>
+
+  <label for="endDate">Date de fin :</label>
+  <input type="datetime-local" id="endDate" name="EndDate" required>
+  <br><br>
+
+  <label for="maxSub">Nombre maximum de participants :</label>
+  <input type="number" id="maxSub" name="MaxSub" required>
+  <br><br>
+
+  <label for="minSub">Nombre minimum de participants (optionnel) :</label>
+  <input type="number" id="minSub" name="MinSub">
+  <br><br>
+
+  <label for="available">Disponible :</label>
+  <input type="checkbox" id="available" name="Available"><br><br>
+
+  <!-- Choix entre lieu existant ou nouveau -->
+  <fieldset>
+    <legend>Lieu :</legend>
+
+    <label for="">Lieu déjà enregistré :</label>
+    <input type="" id="" name=""><br><br>
+    <!-- Id_PlaceEventYoga -->
+
+    <label for="">Nouveau lieu (si non existant) :</label><br>
+    <input type="" id="" name="">
+  </fieldset>
+  <br>
+  <button type="submit">Soumettre</button>
+</form>

@@ -5,7 +5,7 @@ import { AdminCalendarComponent } from './admin/pages/admin-calendar/admin-calen
 import { adminRoutes } from './admin/admin.routes';
 
 export const routes: Routes = [
-    { //path: 'admin/adminCalendar', 
+    { //path: 'ng ', 
      //component: AdminCalendarComponent,
      path: 'admin',
      children: adminRoutes
