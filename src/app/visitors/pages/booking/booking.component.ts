@@ -14,8 +14,9 @@ import { CommonModule } from '@angular/common';
 
 import locale from '@fullcalendar/core/locales/fr';
 
-
 // fin calendar
+
+import { BookingService } from '../../services/booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -24,6 +25,11 @@ import locale from '@fullcalendar/core/locales/fr';
   styleUrl: './booking.component.scss'
 })
 export class BookingComponent {
+
+  bookingService = inject(BookingService);
+
+  events!: EventSourceInput;
+  
 
   calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin, interactionPlugin],
@@ -34,6 +40,14 @@ export class BookingComponent {
     // dateClick: (info) => this.showPopup(info.date),
     // eventClick: (ev) => console.log(ev)
   }; 
+
+  constructor() {
+    this.bookingService.get().subscribe(data => this.events = data.map(e => ({
+      start: new Date(e.startDate),
+      end: new Date(e.endDate), 
+      title: `${e.title} (${e.description})`,
+    })))
+  }
 
 }
 

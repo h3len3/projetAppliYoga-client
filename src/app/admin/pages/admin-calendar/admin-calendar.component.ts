@@ -55,7 +55,7 @@ export class AdminCalendarComponent {
   constructor() {
     this.eventService.get().subscribe(data => this.events = data.map(e => ({
       start: new Date(e.startDate),
-      end: new Date(e.endDate),
+      end: new Date(e.endDate), 
       title: `${e.title} (${e.description})`,
     })))
   }

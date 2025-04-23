@@ -15,6 +15,6 @@ export class PopUpEventComponent {
   date = input<Date|null>()
   locations: PlaceEventModel[] = []
   constructor() {
-    this.placeEventService.get().subscribe(data => this.locations = data);
+    this.placeEventService.get().subscribe(data => this.locations = data); 
   }
 }
