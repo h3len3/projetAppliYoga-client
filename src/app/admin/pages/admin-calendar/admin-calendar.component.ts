@@ -1,3 +1,4 @@
+
 import { Component, inject, ViewChild } from '@angular/core';
 
 //calendar
@@ -20,8 +21,19 @@ import { EventService } from '../../services/event.service';
 import { PopUpEventComponent } from '../pop-up-event/pop-up-event.component';
 import { DialogModule } from 'primeng/dialog';
 
+//
+import {Toast} from 'primeng/toast';
+import {ConfirmDialog} from 'primeng/confirmdialog';
+
+
+import {EventClickArg, EventInput,} from '@fullcalendar/core';
+import DayGridPlugin from '@fullcalendar/daygrid';
+import InteractionPlugin, {DateClickArg} from '@fullcalendar/interaction';
+//
+
+
 @Component({
-  imports: [CommonModule, FullCalendarModule,  PopUpEventComponent, DialogModule],
+  imports: [CommonModule, FullCalendarModule,  PopUpEventComponent, DialogModule, Toast, ConfirmDialog],
   templateUrl: './admin-calendar.component.html',
   styleUrl: './admin-calendar.component.scss',
 
@@ -30,11 +42,13 @@ import { DialogModule } from 'primeng/dialog';
 })
 export class AdminCalendarComponent {
 
-  eventService = inject(EventService);
-
-  events!: EventSourceInput;
-
-  popupVisible = false;
+  // eventService = inject(EventService);
+  // events!: EventSourceInput;
+  // popupVisible = false;
+  // K : 
+  private eventService = inject(EventService);
+  popupVisible: boolean = false;
+  event: any;
 
   selectedDate: Date|null = null; 
 
@@ -48,28 +62,107 @@ export class AdminCalendarComponent {
       center: 'title',
       left: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
-    dateClick: (info) => this.showPopup(info.date),
-    eventClick: (ev) => console.log(ev)
+    //avt:
+    // dateClick: (info) => this.showPopup(info.date),
+    // eventClick: (ev) => console.log(ev)
+    //k:
+       eventClick: (e) => this.eventClickHandler(e),
+     dateClick: (e) => this.dateClickHandler(e),
+    
   }; 
+  // k : 
+  // options: CalendarOptions & { schedulerLicenseKey: string } = {
+  //   plugins: [resourceTimelinePlugin, InteractionPlugin],
+  //   eventClick: (e) => this.eventClickHandler(e),
+  //   dateClick: (e) => this.dateClickHandler(e),
+  //   schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+  // }
 
-  constructor() {
-    this.eventService.get().subscribe(data => this.events = data.map(e => ({
-      start: new Date(e.startDate),
-      end: new Date(e.endDate), 
-      title: `${e.title} (${e.description})`,
-    })))
+  //k : 
+  events!: EventInput[];
+  //k:
+   constructor() {
+     this.loadEvents()
+   }
+//avt:
+  //  constructor() {
+  //    this.eventService.getAll().subscribe(data => this.events = data.map(e => ({
+  //      start: new Date(e.startDate),
+  //      end: new Date(e.endDate), 
+  //      title: `${e.title} (${e.description})`,
+  //    })))
+  //  }
+
+  //  showPopup(date: Date) {
+  //    this.selectedDate = date;
+  //    console.log(this.selectedDate);
+  //    this.popupVisible = true;
+  //  }
+
+  // k : 
+  onSave(result: boolean) {
+    this.popupVisible = false;
+    this.event = null;
+    if(result) {
+      this.loadEvents();
+    }
   }
 
-  showPopup(date: Date) {
-    this.selectedDate = date;
-    console.log(this.selectedDate);
+  private loadEvents() {
+    this.eventService.getAll().subscribe({
+      next: (data) => {
+        this.event = data.map(e => ({
+          id: e.id,
+          title: e.title,
+          start: new Date(e.startDate),
+          end: new Date(e.endDate),
+          // plus tard quand type évènement
+          //color: this.getColor(e.type),
+           extendedProps: {
+             description: e.description,
+          //   type: e.type
+          }
+        }));
+      }
+    })
+  }
+
+  private getColor(type: string) {
+    switch (type) {
+      case 'Category 1':
+        return '#1f77b4';
+      case 'Category 2':
+        return '#ff7f0e';
+      case 'Category 3':
+        return '#2ca02c';
+      default:
+        return '#d62728';
+    }
+  }
+
+  private eventClickHandler(e: EventClickArg) {
+    this.event = {
+      id: e.event.id,
+      title: e.event.title,
+      description: e.event.extendedProps['description'],
+      startDate: e.event.start,
+      endDate: e.event.end,
+      type: e.event.extendedProps['type'],
+    };
     this.popupVisible = true;
   }
 
-  // test(date: Date) {
-  //   this.dialog.open(PopUpEventComponent, {
-  //     data: { date }
-  //   });
-  // }
+  private dateClickHandler(e: DateClickArg) {
+    this.event = {
+      startDate: e.date.toISOString(),
+    };
+    this.popupVisible = true;
+  }
+
+
+  onClose() {
+    this.popupVisible = false;
+    this.event = null;
+  }
 
 }
