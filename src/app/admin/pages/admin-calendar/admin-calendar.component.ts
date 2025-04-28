@@ -151,6 +151,7 @@ export class AdminCalendarComponent {
       type: e.event.extendedProps['type'],
     };
     this.popupVisible = true;
+    
   }
 
   private dateClickHandler(e: DateClickArg) {
