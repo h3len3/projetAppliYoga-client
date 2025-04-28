@@ -1,4 +1,4 @@
-<h1>Evènement à la date du {{date()|date: 'dd/MM/yyyy'}}</h1>
+<h1>Evènement à la date du {{event().startDate|date: 'dd/MM/yyyy'}}</h1>
 <div class="flex justify-content-end mb-3">
   <p-button icon="pi pi-trash" (onClick)="delete()" severity="danger"></p-button>
 </div>
@@ -39,7 +39,7 @@
     <legend>Lieu :</legend>
 
     <label for="">Lieu déjà enregistré :</label>
-    <select type="" id="" name="">
+    <select formControlName="id_PlaceEventYoga">
       @for(item of locations; track item.id) {
         <option [value]="item.id">{{item.name}}</option>
       }

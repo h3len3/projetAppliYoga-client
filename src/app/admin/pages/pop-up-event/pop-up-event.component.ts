@@ -34,8 +34,9 @@ export class PopUpEventComponent {
   private eventService = inject(EventService);
 
   placeEventService = inject(PlaceEventService);
-  date = input<Date|null>()
+
   locations: PlaceEventModel[] = []
+  
   getEvent() {
      this.placeEventService.get().subscribe(data => this.locations = data); 
    }
@@ -49,9 +50,13 @@ export class PopUpEventComponent {
     startDate: [new Date(), [Validators.required]],
     endDate: [new Date(), [Validators.required]],
     type: ['', [Validators.required]],
+    id_PlaceEventYoga: [0, [Validators.required]],
+    minSub : [10],
+    maxSub : [20]
   });
 
   constructor() {
+    this.getEvent()
     effect(() => {
       if(!this.event()) {
         return;

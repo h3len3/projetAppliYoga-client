@@ -116,24 +116,25 @@ export class AdminCalendarComponent {
           title: e.title,
           start: new Date(e.startDate),
           end: new Date(e.endDate),
-          // plus tard quand type évènement
-          //color: this.getColor(e.type),
+          // type évènement
+          color: this.getColor(e.type),
            extendedProps: {
              description: e.description,
-          //   type: e.type
+             type: e.type
           }
         }));
+        console.log(this.event)
       }
     })
   }
 
   private getColor(type: string) {
     switch (type) {
-      case 'Category 1':
+      case 'Session de groupe':
         return '#1f77b4';
-      case 'Category 2':
+      case 'Session individuelle':
         return '#ff7f0e';
-      case 'Category 3':
+      case 'Evenement special':
         return '#2ca02c';
       default:
         return '#d62728';
