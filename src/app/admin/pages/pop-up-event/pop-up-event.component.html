@@ -39,11 +39,7 @@
     <legend>Lieu :</legend>
 
     <label for="">Lieu déjà enregistré :</label>
-    <select formControlName="id_PlaceEventYoga">
-      @for(item of locations; track item.id) {
-        <option [value]="item.id">{{item.name}}</option>
-      }
-    </select>
+    <p-select  appendTo="body" styleClass="w-full" formControlName="id_PlaceEventYoga" [options]="locations" optionLabel="name" optionValue="id"></p-select>
     <!-- Id_PlaceEventYoga -->
 
     <!-- <label for="">Nouveau lieu (si non existant) :</label><br>

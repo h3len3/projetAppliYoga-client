@@ -120,7 +120,8 @@ export class AdminCalendarComponent {
           color: this.getColor(e.type),
            extendedProps: {
              description: e.description,
-             type: e.type
+             type: e.type,
+             id_PlaceEventYoga: e.id_PlaceEventYoga
           }
         }));
         console.log(this.event)
@@ -149,6 +150,7 @@ export class AdminCalendarComponent {
       startDate: e.event.start,
       endDate: e.event.end,
       type: e.event.extendedProps['type'],
+      id_PlaceEventYoga: e.event.extendedProps['id_PlaceEventYoga'],
     };
     this.popupVisible = true;
     

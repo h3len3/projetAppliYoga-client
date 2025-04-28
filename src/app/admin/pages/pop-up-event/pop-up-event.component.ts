@@ -65,7 +65,11 @@ export class PopUpEventComponent {
         ...this.event(),
         startDate: new Date(this.event().startDate),
         endDate: new Date(this.event().endDate ?? this.event().startDate),
+        id_PlaceEventYoga: this.event().id_PlaceEventYoga ?? 0
       })
+
+      console.log(this.form.value);
+      
     })
   }
 
