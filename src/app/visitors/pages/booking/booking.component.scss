@@ -1,0 +1,88 @@
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // background-color: #a8c3a1; // vert sauge doux
+    background-color: rgb(144 184 139);
+    color: #2e2e2e;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+  
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      // droite
+      justify-content: space-between;
+      //
+    //   justify-content: center;
+    }
+  
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+      
+        li a {
+          color: #2e2e2e;
+          text-decoration: none;
+          font-weight: 500;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          transition: background-color 0.3s;
+      
+          &:hover {
+            background-color: #dbe8d2;
+            color: #1a1a1a;
+          }
+        }
+      
+        &.left-links {
+          display: flex;
+          justify-content: flex-start;
+          flex: 1;
+        }
+      
+        &.right-links {
+          display: flex;
+          justify-content: flex-end;
+          flex: 1;
+        }
+      }
+      
+  
+  .main-content {
+    padding-top: calc(40px + 1rem); // hauteur de la nav + padding
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+
+  h1 {
+  font-size: 1.5rem; // Par exemple, une taille plus petite
+  margin-top: 0;              // Pas de marge au-dessus
+  margin-bottom: 0.2rem;      // Réduire la marge sous le titre
+}
+
+p {
+  font-size: 1rem;            // Taille de texte plus petite
+  line-height: 1.2;           // Réduit l'interligne entre les lignes
+  margin: 0 0 0.5rem 0;       // Réduit la marge entre les paragraphes
+}
+.bold-text {
+    font-weight: bold;  // Applique du gras au texte
+  }
+  .title {
+    text-decoration: underline;       // Appliquer un soulignement
+    text-decoration-color: #d8c28c;  // Couleur beige proche du bambou
+    text-decoration-thickness: 2px;   // Ajuste l'épaisseur si nécessaire
+  }
+
+
+  

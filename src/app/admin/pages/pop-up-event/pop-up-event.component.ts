@@ -1,6 +1,6 @@
 
 import { DatePipe } from '@angular/common';
-import { Component,effect, EventEmitter, inject, input, OnChanges, output, SimpleChanges } from '@angular/core';
+import { Component,effect, EventEmitter, inject, input, OnChanges, output, SimpleChanges} from '@angular/core';
 import { PlaceEventService } from '../../services/place-event.service';
 import { PlaceEventModel } from '../../models/place-event.model';
 
@@ -15,6 +15,8 @@ import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {Select} from 'primeng/select';
 
+
+
 @Component({
   selector: 'app-pop-up-event',
   imports: [DatePipe, Button,
@@ -26,8 +28,9 @@ import {Select} from 'primeng/select';
   templateUrl: './pop-up-event.component.html',
   styleUrl: './pop-up-event.component.scss'
 })
-export class PopUpEventComponent implements OnChanges {
+export class PopUpEventComponent implements OnChanges{
 
+  
   private formBuilder = inject(FormBuilder);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
@@ -86,12 +89,12 @@ export class PopUpEventComponent implements OnChanges {
       this.eventService.update(this.event().id, this.form.getRawValue()),
     ).subscribe({
       next: () => {
-        this.messageService.add({severity: 'success', summary: 'Event saved'});
+        this.messageService.add({severity: 'success', summary: 'Evènement enregistré'});
         this.onSave.emit(true);
         this.form.reset();
       },
       error: () => {
-        this.messageService.add({severity: 'error', summary: 'Error saving event'});
+        this.messageService.add({severity: 'error', summary: 'Erreur pour l\'enregistrement de l\évènement'});
       }
     })
   }
@@ -102,12 +105,12 @@ export class PopUpEventComponent implements OnChanges {
       accept: () => {
         this.eventService.delete(this.event().id).subscribe({
           next: () => {
-            this.messageService.add({severity: 'success', summary: 'Event deleted'});
+            this.messageService.add({severity: 'success', summary: 'Evènement supprimé'});
             this.onSave.emit(true);
             this.form.reset();
           },
           error: () => {
-            this.messageService.add({severity: 'error', summary: 'Error deleting event'});
+            this.messageService.add({severity: 'error', summary: 'Erreur dans la suppression de l\'évènement'});
           }
         })
       }
