@@ -1,7 +1,17 @@
-<p>popupbooking works!</p>
 
 <div *ngIf="popupVisible" class="popup">
-  <p class="question">Voulez-vous vous inscrire à l'évènement du {{event()?.startDate|date: 'dd/MM/yyyy à HH:mm'}} ?</p> 
+  <!-- Affiche le message de confirmation UNIQUEMENT si submitted est true -->
+  <ng-container *ngIf="submitted; else showForm">
+    <div class="confirmation-message">
+      <p class="text-center text-success text-xl">
+        🎉 Merci pour votre inscription !<br>📧 Un mail vous a été envoyé.
+      </p>
+    </div>
+  </ng-container>
+
+  <!-- Contenu du formulaire à afficher uniquement si submitted est false -->
+  <ng-template #showForm>
+    <p class="question">Voulez-vous vous inscrire à l'évènement du {{event()?.startDate|date: 'dd/MM/yyyy à HH:mm'}} ?</p> 
 
   <div *ngIf="!showEmailInput" class="buttons">
     <button class="btn yes" (click)="onYesClick()">Oui</button>
@@ -11,7 +21,15 @@
   <div *ngIf="showEmailInput" class="email-input">
     <p>Entrez votre adresse mail pour inscrire : </p>
     <input type="email" [(ngModel)]="email" placeholder="votre adresse mail" />
+    <br>
+    <br>
+    <div class="pb-3 flex justify-content-end">
+      <p-button type="submit" (click)="onSubmit()" label="Je m'inscris !" icon="pi" iconPos="right"></p-button>
+    </div>
   </div>
+  </ng-template>
+
 </div>
+
 
 

@@ -36,17 +36,33 @@ import { DialogModule } from 'primeng/dialog';
 
 export class PopupbookingComponent {
 
-
   event = input<EventModel>();
   showEmailInput = false;
   popupVisible = true;
   email = '';
+
+  submitted = false;
 
   onYesClick() {
     this.showEmailInput = true;
   }
    onNoClick() {
     this.popupVisible = false;
+  }
+
+  onSubmit() {
+    //if (this.email.trim()) 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (this.email.trim() && emailRegex.test(this.email)) {
+  // si le champ email n'est pas vide et que il correspond à format mail valide
+     
+      // on peux aussi appeler BookingService ici
+      // this.bookingService.register(this.email).subscribe(...);
+  
+      this.submitted = true;
+      // Optionnel : masquer complètement la pop-up après quelques secondes
+      // setTimeout(() => this.popupVisible = false, 5000);
+    }
   }
 
 }
