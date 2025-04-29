@@ -14,8 +14,8 @@ export class BookingService {
   }
 
   private apiUrl = 'http://localhost:5063/api/User'; 
-  createUser(email: string) {
-    return this.httpClient.post(this.apiUrl, { email });
+  createUser(Email: string) {
+    return this.httpClient.post(this.apiUrl, { Email });
   }
 
 
