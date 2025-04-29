@@ -1,6 +1,6 @@
 
 import { DatePipe } from '@angular/common';
-import { Component,effect, EventEmitter, inject, input, output } from '@angular/core';
+import { Component,effect, EventEmitter, inject, input, OnChanges, output, SimpleChanges } from '@angular/core';
 import { PlaceEventService } from '../../services/place-event.service';
 import { PlaceEventModel } from '../../models/place-event.model';
 
@@ -26,7 +26,7 @@ import {Select} from 'primeng/select';
   templateUrl: './pop-up-event.component.html',
   styleUrl: './pop-up-event.component.scss'
 })
-export class PopUpEventComponent {
+export class PopUpEventComponent implements OnChanges {
 
   private formBuilder = inject(FormBuilder);
   private messageService = inject(MessageService);
@@ -44,33 +44,36 @@ export class PopUpEventComponent {
 
   onSave = output<boolean>();
   event = input.required<EventModel>();
-  form = this.formBuilder.group({
+  form: FormGroup = this.formBuilder.group({
     title: ['', [Validators.required]],
     description: [''],
     startDate: [new Date(), [Validators.required]],
     endDate: [new Date(), [Validators.required]],
     type: ['', [Validators.required]],
-    id_PlaceEventYoga: [0, [Validators.required]],
+    id_PlaceEventYoga: [null, [Validators.required]],
     minSub : [10],
     maxSub : [20]
   });
 
   constructor() {
     this.getEvent()
-    effect(() => {
-      if(!this.event()) {
-        return;
-      }
-      this.form.patchValue({
-        ...this.event(),
-        startDate: new Date(this.event().startDate),
-        endDate: new Date(this.event().endDate ?? this.event().startDate),
-        id_PlaceEventYoga: this.event().id_PlaceEventYoga ?? 0
-      })
-
-      console.log(this.form.value);
-      
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!this.event()) {
+      return;
+    }
+    this.form.patchValue({
+      ...this.event(),
+      startDate: new Date(this.event().startDate),
+      endDate: new Date(this.event().endDate ?? this.event().startDate),
+      id_PlaceEventYoga: this.event().id_PlaceEventYoga ?? 0
     })
+    //désactiver le type pour la modif
+    if(this.event().id ){
+      this.form.controls["type"].disable()
+    }
+    else this.form.controls["type"].enable()
   }
 
   save() {
@@ -80,7 +83,7 @@ export class PopUpEventComponent {
     iif(
       () => !this.event().id,
       this.eventService.add(this.form.value),
-      this.eventService.update(this.event().id, this.form.value),
+      this.eventService.update(this.event().id, this.form.getRawValue()),
     ).subscribe({
       next: () => {
         this.messageService.add({severity: 'success', summary: 'Event saved'});

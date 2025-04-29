@@ -6,6 +6,7 @@ export interface EventModel {
     endDate: string
     type : string,
     id_PlaceEventYoga: number,
+    
 }
 
 /* public int Id_Event { get; set; }

@@ -111,14 +111,15 @@ export class AdminCalendarComponent {
   private loadEvents() {
     this.eventService.getAll().subscribe({
       next: (data) => {
-        this.event = data.map(e => ({
-          id: e.id,
+        this.events = data.map(e => ({
           title: e.title,
           start: new Date(e.startDate),
           end: new Date(e.endDate),
           // type évènement
           color: this.getColor(e.type),
+          // propriétés suppl - pas u par full calendar (pour mapping <-> cfr l 147)
            extendedProps: {
+             id: e.id,
              description: e.description,
              type: e.type,
              id_PlaceEventYoga: e.id_PlaceEventYoga
@@ -131,12 +132,13 @@ export class AdminCalendarComponent {
 
   private getColor(type: string) {
     switch (type) {
-      case 'Session de groupe':
+      case 'GroupSession':
         return '#1f77b4';
-      case 'Session individuelle':
+      case 'IndividualSession':
         return '#ff7f0e';
-      case 'Evenement special':
+      case 'SpecialEvent':
         return '#2ca02c';
+        //default et else
       default:
         return '#d62728';
     }
@@ -144,7 +146,7 @@ export class AdminCalendarComponent {
 
   private eventClickHandler(e: EventClickArg) {
     this.event = {
-      id: e.event.id,
+      id: e.event.extendedProps['id'],
       title: e.event.title,
       description: e.event.extendedProps['description'],
       startDate: e.event.start,
