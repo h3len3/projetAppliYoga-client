@@ -1,0 +1,17 @@
+<p>popupbooking works!</p>
+
+<div *ngIf="popupVisible" class="popup">
+  <p class="question">Voulez-vous vous inscrire à l'évènement du {{event()?.startDate|date: 'dd/MM/yyyy à HH:mm'}} ?</p> 
+
+  <div *ngIf="!showEmailInput" class="buttons">
+    <button class="btn yes" (click)="onYesClick()">Oui</button>
+    <button class="btn no" (click)="onNoClick()">Non</button>
+  </div>
+
+  <div *ngIf="showEmailInput" class="email-input">
+    <p>Entrez votre adresse mail pour inscrire : </p>
+    <input type="email" [(ngModel)]="email" placeholder="votre adresse mail" />
+  </div>
+</div>
+
+

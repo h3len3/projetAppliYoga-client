@@ -114,6 +114,4 @@ export class PopUpEventComponent implements OnChanges {
     })
   }
 
-
-
 }

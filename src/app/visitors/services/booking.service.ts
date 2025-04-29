@@ -9,7 +9,7 @@ export class BookingService {
 
   private httpClient = inject(HttpClient)
 
-  get() {
+  getAll() {
     return this.httpClient.get<EventModel[]>('http://localhost:5063/api/Event');
   }
 
