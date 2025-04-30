@@ -1,5 +1,5 @@
 
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, computed, inject, ViewChild } from '@angular/core';
 
 //calendar
 
@@ -30,6 +30,8 @@ import {EventClickArg, EventInput,} from '@fullcalendar/core';
 import DayGridPlugin from '@fullcalendar/daygrid';
 import InteractionPlugin, {DateClickArg} from '@fullcalendar/interaction';
 //
+// pour bulle au survol
+import tippy from 'tippy.js';
 
 
 @Component({
@@ -50,6 +52,8 @@ export class AdminCalendarComponent {
   popupVisible: boolean = false;
   event: any;
 
+  header!: string;
+
   selectedDate: Date|null = null; 
 
   calendarOptions: CalendarOptions = {
@@ -57,6 +61,17 @@ export class AdminCalendarComponent {
     //initialView: 'timeGridWeek', // ou 'timeGridDay'
     initialView: 'dayGridMonth',
     locale,
+    // h - h 
+    displayEventEnd:true,
+    // bulle au survol
+    eventDidMount: function(info) {
+      tippy(info.el, {
+        animation: true,
+        allowHTML: true,
+        content: `<b>${info.event.title}</b>`
+        // ${info.reservation.user} // faire un modele réservation ? user ? 
+      })
+    },
     headerToolbar: {
       right: 'prev,next today',
       center: 'title',
@@ -154,6 +169,7 @@ export class AdminCalendarComponent {
       type: e.event.extendedProps['type'],
       id_PlaceEventYoga: e.event.extendedProps['id_PlaceEventYoga'],
     };
+    this.header = `Evènement à la date du ${this.event.startDate.toLocaleString()}`
     this.popupVisible = true;
     
   }
@@ -164,7 +180,6 @@ export class AdminCalendarComponent {
     };
     this.popupVisible = true;
   }
-
 
   onClose() {
     this.popupVisible = false;

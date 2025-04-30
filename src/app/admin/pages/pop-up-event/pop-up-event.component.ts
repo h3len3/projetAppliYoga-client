@@ -72,6 +72,8 @@ export class PopUpEventComponent implements OnChanges{
     if(!this.event()) {
       return;
     }
+    //charger les insciptions
+    // this.revervations = this.reservationsService.getByEventId(event().id) 
     this.form.patchValue({
       ...this.event(),
       startDate: new Date(this.event().startDate),

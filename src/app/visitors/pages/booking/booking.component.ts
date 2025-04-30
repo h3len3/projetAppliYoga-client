@@ -53,7 +53,9 @@ export class BookingComponent {
     
     initialView: 'dayGridMonth',
     locale,
+    // h - h 
     displayEventEnd:true,
+    // bulle au survol
     eventDidMount: function(info) {
       tippy(info.el, {
         animation: true,

@@ -1,14 +1,11 @@
-//@import '@fullcalendar/common/main.css';
-//@import '@fullcalendar/daygrid/main.css';
-
 .top-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     // background-color: #a8c3a1; // vert sauge doux
-    background-color: #2e2e2e;
-    color: blanchedalmond;
+    background-color: rgb(144 184 139);
+    color: #2e2e2e;
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
@@ -32,7 +29,7 @@
         padding: 0;
       
         li a {
-          color: whitesmoke;
+          color: #2e2e2e;
           text-decoration: none;
           font-weight: 500;
           padding: 0.5rem 1rem;
@@ -41,7 +38,7 @@
       
           &:hover {
             background-color: #dbe8d2;
-            color: black;
+            color: #1a1a1a;
           }
         }
       
@@ -83,6 +80,29 @@ p {
   }
   .title {
     text-decoration: underline;       // Appliquer un soulignement
-    text-decoration-color: #d8c28c;  // Couleur beige proche du bambou
+  
     text-decoration-thickness: 2px;   // Ajuste l'épaisseur si nécessaire
   }
+
+  .photo-profil {
+    width: 200px;
+    height: auto; /* garde les proportions */
+    border-radius: 8px; /* coins arrondis */
+    
+    //border-radius: 50%; /* rend l'image ronde */
+    margin-top: 20px;
+  }
+
+  .main-content {
+    padding-top: calc(40px + 1rem); 
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centre horizontalement */
+    text-align: center;  /* centre le texte */
+    padding: 20px;
+  }
+
+ 
+
+
+  

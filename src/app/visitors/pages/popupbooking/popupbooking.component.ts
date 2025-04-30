@@ -67,10 +67,10 @@ export class PopupbookingComponent {
           this.submitted = true;
           setTimeout(() => this.popupVisible = false, 5000);
         },
-        error: () => {
+        error: (xhr) => {
           this.messageService.add({
             severity: 'error',
-            summary: '????'
+            summary: xhr.error
           })
         }
       });
