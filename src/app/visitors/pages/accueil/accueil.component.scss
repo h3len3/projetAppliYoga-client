@@ -4,13 +4,15 @@
     left: 0;
     width: 100%;
     // background-color: #a8c3a1; // vert sauge doux
-    background-color: rgb(144 184 139);
+    // background-color: rgb(144 184 139);
+    background-color: #8BC7B3;
     color: #2e2e2e;
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    // height: 60px;
 }
-  
-    .nav-container {
+ 
+.nav-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 1rem 2rem;
@@ -54,19 +56,14 @@
           flex: 1;
         }
       }
+    #connexion {
+      color:#F6F2B1 !important;
+    }
       
-  
-  .main-content {
-    padding-top: calc(40px + 1rem); // hauteur de la nav + padding
-    padding-left: 2rem;
-    padding-right: 2rem;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  }
 
   h1 {
   font-size: 1.5rem; // Par exemple, une taille plus petite
-  margin-top: 0;              // Pas de marge au-dessus
+  margin-top: 0.2rem;              // Pas de marge au-dessus
   margin-bottom: 0.2rem;      // Réduire la marge sous le titre
 }
 
@@ -75,32 +72,52 @@ p {
   line-height: 1.2;           // Réduit l'interligne entre les lignes
   margin: 0 0 0.5rem 0;       // Réduit la marge entre les paragraphes
 }
-.bold-text {
-    font-weight: bold;  // Applique du gras au texte
-  }
-  .title {
-    text-decoration: underline;       // Appliquer un soulignement
-  
-    text-decoration-thickness: 2px;   // Ajuste l'épaisseur si nécessaire
-  }
 
-  .photo-profil {
-    width: 200px;
-    height: auto; /* garde les proportions */
-    border-radius: 8px; /* coins arrondis */
-    
-    //border-radius: 50%; /* rend l'image ronde */
+ 
+$padding-main: 2rem;
+$grid-gap: 1rem;
+$min-image-width: 200px;
+$max-width-container: 1200px;
+
+.main-content {
+  padding-top: calc(40px + 1rem); // Hauteur de la nav + padding
+  padding-left: $padding-main;
+  padding-right: $padding-main;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .photo-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($min-image-width, 1fr)); // Mosaïque responsive
+    gap: $grid-gap;
+    width: 100%;
+    max-width: $max-width-container;
     margin-top: 20px;
+
+    .photo-profil {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover; // Permet de conserver le recadrage approprié des images
+    }
   }
 
-  .main-content {
-    padding-top: calc(40px + 1rem); 
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centre horizontalement */
-    text-align: center;  /* centre le texte */
-    padding: 20px;
+  @media (max-width: 768px) {
+    .photo-container {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); // Colonnes plus petites pour les écrans mobiles
+    }
   }
+.about-text {
+  padding: 25px;
+}
+.bold-text {
+  font-weight: bold;  // Applique du gras au texte
+}
+}
 
  
 

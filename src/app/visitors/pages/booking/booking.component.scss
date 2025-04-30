@@ -4,7 +4,8 @@
     left: 0;
     width: 100%;
     // background-color: #a8c3a1; // vert sauge doux
-    background-color: rgb(144 184 139);
+    // background-color: rgb(144 184 139);
+    background-color: #8BC7B3;
     color: #2e2e2e;
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -54,9 +55,11 @@
           flex: 1;
         }
       }
-      
+      #connexion {
+        color:#F6F2B1 !important;
+      }     
   
-  .main-content {
+.main-content {
     padding-top: calc(40px + 1rem); // hauteur de la nav + padding
     padding-left: 2rem;
     padding-right: 2rem;
@@ -80,7 +83,8 @@ p {
   }
   .title {
     text-decoration: underline;       // Appliquer un soulignement
-    text-decoration-color: #d8c28c;  // Couleur beige proche du bambou
+    // text-decoration-color: #d8c28c;  // Couleur beige proche du bambou
+    text-decoration-color: #F6F2B1; 
     text-decoration-thickness: 2px;   // Ajuste l'épaisseur si nécessaire
   }
 
