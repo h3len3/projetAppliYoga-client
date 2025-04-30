@@ -39,6 +39,12 @@ export class PopUpEventComponent implements OnChanges{
   placeEventService = inject(PlaceEventService);
 
   locations: PlaceEventModel[] = []
+  typeOptions = [
+    { value: 'GroupSession', label: 'Cours collectif' },
+    { value: 'IndividualSession', label: 'Cours individuel' },
+    { value: 'SpecialEvent', label: 'Évenement spécial' },
+    { value: 'Autre', label: 'Autre' },
+  ];
   
   getEvent() {
      this.placeEventService.get().subscribe(data => this.locations = data); 
@@ -102,6 +108,8 @@ export class PopUpEventComponent implements OnChanges{
   delete() {
     this.confirmationService.confirm({
       header: 'Êtes-vous sûr de vouloir supprimer cet événement ?',
+      acceptLabel: 'Oui',
+      rejectLabel: 'Non',
       accept: () => {
         this.eventService.delete(this.event().id).subscribe({
           next: () => {

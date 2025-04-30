@@ -34,9 +34,11 @@
             "styles": [
               "node_modules/primeflex/primeflex.min.css",
               "node_modules/primeicons/primeicons.css",
+              "node_modules/tippy.js/dist/tippy.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

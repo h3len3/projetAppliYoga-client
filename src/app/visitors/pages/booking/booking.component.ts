@@ -27,8 +27,8 @@ import { DialogModule } from 'primeng/dialog';
 import {Toast} from 'primeng/toast';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 
-
-import {EventClickArg, EventInput,} from '@fullcalendar/core';
+import tippy from 'tippy.js';
+import {EventClickArg, EventInput} from '@fullcalendar/core';
 import DayGridPlugin from '@fullcalendar/daygrid';
 import InteractionPlugin, {DateClickArg} from '@fullcalendar/interaction';
 //
@@ -53,6 +53,14 @@ export class BookingComponent {
     
     initialView: 'dayGridMonth',
     locale,
+    displayEventEnd:true,
+    eventDidMount: function(info) {
+      tippy(info.el, {
+        animation: true,
+        allowHTML: true,
+        content: `<b>${info.event.title}</b> ${info.event.extendedProps['description']}`
+      })
+    },
 
     eventClick: (e) => this.eventClickHandler(e),
     //dateClick: (e) => this.dateClickHandler(e),

@@ -13,9 +13,9 @@ export class BookingService {
     return this.httpClient.get<EventModel[]>('http://localhost:5063/api/Event');
   }
 
-  private apiUrl = 'http://localhost:5063/api/User'; 
-  createUser(Email: string) {
-    return this.httpClient.post(this.apiUrl, { Email });
+  private apiUrl = 'http://localhost:5063/api/Event/Register'; 
+  register(id: number, email: string) {
+    return this.httpClient.post(this.apiUrl + '/' + id, { email });
   }
 
 

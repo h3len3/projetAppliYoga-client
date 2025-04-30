@@ -36,6 +36,11 @@ import { DialogModule } from 'primeng/dialog';
 
 export class PopupbookingComponent {
 
+  bookingService = inject(BookingService);
+
+  // gerer les toasts
+  messageService = inject(MessageService);
+
   event = input<EventModel>();
   showEmailInput = false;
   popupVisible = true;
@@ -57,9 +62,19 @@ export class PopupbookingComponent {
   // si le champ email n'est pas vide et que il correspond à format mail valide
      
       // on peux aussi appeler BookingService ici
-      // this.bookingService.register(this.email).subscribe(...);
+      this.bookingService.register(this.event()?.id!, this.email).subscribe({
+        next: () => {
+          this.submitted = true;
+          setTimeout(() => this.popupVisible = false, 5000);
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: '????'
+          })
+        }
+      });
   
-      this.submitted = true;
       // Optionnel : masquer complètement la pop-up après quelques secondes
       // setTimeout(() => this.popupVisible = false, 5000);
     }
