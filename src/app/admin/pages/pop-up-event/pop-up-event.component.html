@@ -85,11 +85,15 @@
     </div> -->
 
     <!-- Version  2 -->
-    <p-card header="👥 Personnes inscrites" *ngIf="reservations.length > 0" styleClass="mb-3">
+    <p-card header="👥 Personnes inscrites :" *ngIf="reservations.length > 0" styleClass="mb-3">
       <div *ngFor="let r of reservations" class="p-mb-2" style="border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
         <strong>{{ r.email }}</strong><br />
         Réservé le : {{ r.dateReservation | date:'short' }}<br />
-        <p-tag [severity]="r.payed ? 'success' : 'danger'" [value]="r.payed ? 'Payé' : 'Non payé'"></p-tag>
+        <!-- <p-tag [severity]="r.payed ? 'success' : 'danger'" [value]="r.payed ? 'Payé' : 'Non payé'"></p-tag> -->
+        <p-tag 
+          [value]="r.payed ? 'Payé' : 'Non payé'" 
+          [styleClass]="r.payed ? 'tag-paid' : 'tag-unpaid'">
+      </p-tag>
       </div>
     </p-card>
     <p *ngIf="reservations.length === 0">Aucune inscription pour le moment.</p>

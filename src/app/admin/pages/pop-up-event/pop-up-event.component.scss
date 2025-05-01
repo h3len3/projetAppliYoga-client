@@ -1,3 +1,22 @@
+// inscr
+.tag-unpaid {
+    background-color: #ffe6e6 !important;  // rouge très clair
+    color: #b30000 !important;             // rouge doux
+    font-size: 0.75rem !important;         // plus petit
+    padding: 0.25rem 0.5rem !important;    // plus fin
+    border-radius: 8px !important;         // coins plus doux
+  }
+  
+  .tag-paid {
+    background-color: #e0f4e0 !important;
+    color: #207520 !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 8px !important;
+  }
 
-
+  ::ng-deep .p-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
 
