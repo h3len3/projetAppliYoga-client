@@ -8,3 +8,12 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// modifier la couleur dans l'encadré calendrier de primeNG ds popupevent du crud event
+.p-datepicker-day-selected {
+     background: #8BC7B3;
+     color: var(--p-datepicker-date-selected-color);
+   }
+
+//    #007ad9 !important;
