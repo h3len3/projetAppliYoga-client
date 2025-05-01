@@ -1,4 +1,14 @@
 <div class="flex justify-content-end mb-3">
+  <!-- inscrits :  -->
+<!-- <div *ngIf="reservations.length > 0">
+  <h4>Personnes inscrites :</h4>
+  <ul>
+    <li *ngFor="let r of reservations">
+      {{ r.email }}
+    </li>
+  </ul>
+</div> -->
+<!--  -->
   <p-button icon="pi pi-trash" (onClick)="delete()" severity="danger"></p-button>
 </div>
 <form [formGroup]="form" (ngSubmit)="save()">
@@ -51,9 +61,41 @@
   </div>
 </form>
 
+
     <!-- <label for="title">Titre :</label>
     <input type="text" id="title" name="Title" required>
     <br><br> -->
+
+<!-- réceptions des inscrits  - ?TODO : composant?-->
+ <!--  Version 1 -->
+    <!-- <div class="inscrits-section" style="margin-bottom: 1rem;">
+      <h4>👥 Personnes inscrites :</h4>
+      <div *ngIf="reservations.length === 0">Aucune inscription pour le moment.</div>
+      <ul *ngIf="reservations.length > 0" class="p-0" style="list-style-type: none;">
+        <li *ngFor="let r of reservations" class="p-mb-2">
+          <div style="padding: 0.5rem; border-bottom: 1px solid #ccc;">
+            <strong>{{ r.email }}</strong><br />
+            Réservé le : {{ r.dateReservation | date:'short' }}<br />
+            <span [ngStyle]="{ color: r.payed ? 'green' : 'red' }">
+              {{ r.payed ? '✅ Payé' : '❌ Non payé' }}
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div> -->
+
+    <!-- Version  2 -->
+    <p-card header="👥 Personnes inscrites" *ngIf="reservations.length > 0" styleClass="mb-3">
+      <div *ngFor="let r of reservations" class="p-mb-2" style="border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
+        <strong>{{ r.email }}</strong><br />
+        Réservé le : {{ r.dateReservation | date:'short' }}<br />
+        <p-tag [severity]="r.payed ? 'success' : 'danger'" [value]="r.payed ? 'Payé' : 'Non payé'"></p-tag>
+      </div>
+    </p-card>
+    <p *ngIf="reservations.length === 0">Aucune inscription pour le moment.</p>
+    
+
+    
 
 
  

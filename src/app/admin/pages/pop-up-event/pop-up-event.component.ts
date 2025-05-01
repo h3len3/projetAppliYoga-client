@@ -15,7 +15,12 @@ import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {Select} from 'primeng/select';
 
-
+import {ReservationModel} from '../../models/reservation.model';
+import {ReservationService} from '../../services/reservation.service';
+import { CommonModule } from '@angular/common';
+// pour version 2 de l'affichage des inscrits : 
+import { Card } from 'primeng/card';
+import { Tag } from 'primeng/tag';
 
 @Component({
   selector: 'app-pop-up-event',
@@ -24,7 +29,12 @@ import {Select} from 'primeng/select';
     FloatLabel,
     InputText,
     DatePicker,
-    Select],
+    Select,
+    //inscrits
+    CommonModule,
+    // version 2 affichage inscrits
+    Card,
+    Tag,],
   templateUrl: './pop-up-event.component.html',
   styleUrl: './pop-up-event.component.scss'
 })
@@ -35,6 +45,8 @@ export class PopUpEventComponent implements OnChanges{
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
   private eventService = inject(EventService);
+
+  private reservationService = inject(ReservationService);
 
   placeEventService = inject(PlaceEventService);
 
@@ -67,13 +79,23 @@ export class PopUpEventComponent implements OnChanges{
   constructor() {
     this.getEvent()
   }
+
+  // pour feature reception inscrits à cet event
+  reservations: ReservationModel[] = [];
+  //
   
   ngOnChanges(changes: SimpleChanges): void {
     if(!this.event()) {
       return;
     }
     //charger les insciptions
+    // K : 
     // this.revervations = this.reservationsService.getByEventId(event().id) 
+    this.reservationService.getByEventId(this.event().id).subscribe(data => {
+      this.reservations = data;
+    });
+
+
     this.form.patchValue({
       ...this.event(),
       startDate: new Date(this.event().startDate),
