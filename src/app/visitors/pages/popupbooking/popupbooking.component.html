@@ -19,7 +19,9 @@
   </div>
 
   <div *ngIf="showEmailInput" class="email-input">
-    <p>Entrez votre adresse mail pour inscrire : </p>
+    <p>Entrez votre adresse mail pour vous y inscrire : </p>
+    <!-- TODO Authentification -->
+    <!-- <p> Si vous n'avez pas encore de compte, un compte sera créé automatiquement avec cette adresse mail</p> -->
     <input type="email" [(ngModel)]="email" placeholder="votre adresse mail" />
     <br>
     <br>
