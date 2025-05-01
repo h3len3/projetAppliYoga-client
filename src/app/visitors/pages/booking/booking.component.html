@@ -32,7 +32,8 @@
 
     <p-dialog [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true" [(visible)]="popupVisible" header="Réserver" modal="true" (onHide)="onClose()" >
     @if(event) {
-        <app-popupbooking [event]="event"></app-popupbooking>
+        <!-- <app-popupbooking [event]="event"></app-popupbooking> -->
+        <app-popupbooking [event]="event" (close)="onClose()"></app-popupbooking>
     }
     </p-dialog>
     <p-toast></p-toast>

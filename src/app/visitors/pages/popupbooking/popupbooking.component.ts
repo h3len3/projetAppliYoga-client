@@ -46,13 +46,24 @@ export class PopupbookingComponent {
   popupVisible = true;
   email = '';
 
+  // pour fermeture 
+  // Il faut que le composant PopupbookingComponent notifie le composant parent (BookingComponent) 
+  // pour lui dire de fermer la popup, et cela se fait vua Output(). 
+  // + signaler dans onNoClick + dans le submit()
+  // + Dans le HTML du BookingComponent, brancher l'output
+  @Output() close = new EventEmitter<void>();
+
   submitted = false;
 
   onYesClick() {
     this.showEmailInput = true;
   }
-   onNoClick() {
-    this.popupVisible = false;
+
+  //  onNoClick() {
+  //   this.popupVisible = false;
+  // }
+  onNoClick() {
+    this.close.emit(); // Signale au parent de fermer
   }
 
   onSubmit() {
@@ -65,7 +76,10 @@ export class PopupbookingComponent {
       this.bookingService.register(this.event()?.id!, this.email).subscribe({
         next: () => {
           this.submitted = true;
-          setTimeout(() => this.popupVisible = false, 5000);
+          // setTimeout(() => this.popupVisible = false, 5000);
+          setTimeout(() => {
+            this.close.emit(); // Fermer après 5s
+          }, 5000);
         },
         error: (xhr) => {
           this.messageService.add({
@@ -79,5 +93,12 @@ export class PopupbookingComponent {
       // setTimeout(() => this.popupVisible = false, 5000);
     }
   }
+
+
+  
+  
+  
+
+ 
 
 }
