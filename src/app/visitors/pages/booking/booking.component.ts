@@ -60,7 +60,7 @@ export class BookingComponent {
       tippy(info.el, {
         animation: true,
         allowHTML: true,
-        content: `<b>${info.event.title}</b> ${info.event.extendedProps['description']}`
+        content: `<b>${info.event.title}</b> ${info.event.extendedProps["placeAddress"]} ${info.event.extendedProps['description']}`
       })
     },
 
@@ -90,12 +90,8 @@ export class BookingComponent {
           // type évènement
           color: this.getColor(e.type),
           // propriétés suppl - pas u par full calendar (pour mapping <-> cfr l 147)
-           extendedProps: {
-             id: e.id,
-             description: e.description,
-             type: e.type,
-             id_PlaceEventYoga: e.id_PlaceEventYoga
-          }
+           extendedProps: e
+             
         }));
         
       }
@@ -118,13 +114,8 @@ export class BookingComponent {
 
   private eventClickHandler(e: EventClickArg) {
      this.event = {
-       id: e.event.extendedProps['id'],
-       title: e.event.title,
-       description: e.event.extendedProps['description'],
-       startDate: e.event.start,
-       endDate: e.event.end,
-       type: e.event.extendedProps['type'],
-       id_PlaceEventYoga: e.event.extendedProps['id_PlaceEventYoga'],
+       ...e.event.extendedProps
+    
      };
      this.popupVisible = true;
     

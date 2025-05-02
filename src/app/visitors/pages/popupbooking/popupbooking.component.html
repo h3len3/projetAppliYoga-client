@@ -11,7 +11,7 @@
 
   <!-- Contenu du formulaire à afficher uniquement si submitted est false -->
   <ng-template #showForm>
-    <p class="question">Voulez-vous vous inscrire à l'évènement du {{event()?.startDate|date: 'dd/MM/yyyy à HH:mm'}} ?</p> 
+    <p class="question">Voulez-vous vous inscrire à l'évènement du {{event()?.startDate|date: 'dd/MM/yyyy à HH:mm'}} - {{event()?.placeName}}, {{event()?.placeAddress}}  ?</p> 
 
   <div *ngIf="!showEmailInput" class="buttons">
     <button class="btn yes" (click)="onYesClick()">Oui</button>

@@ -127,18 +127,13 @@ export class AdminCalendarComponent {
     this.eventService.getAll().subscribe({
       next: (data) => {
         this.events = data.map(e => ({
-          title: e.title,
+          title: e.title + " " + e.placeName + e.placeAddress,
           start: new Date(e.startDate),
           end: new Date(e.endDate),
           // type évènement
           color: this.getColor(e.type),
           // propriétés suppl - pas u par full calendar (pour mapping <-> cfr l 147)
-           extendedProps: {
-             id: e.id,
-             description: e.description,
-             type: e.type,
-             id_PlaceEventYoga: e.id_PlaceEventYoga
-          }
+            extendedProps: e
         }));
         console.log(this.event)
       }
@@ -161,13 +156,7 @@ export class AdminCalendarComponent {
 
   private eventClickHandler(e: EventClickArg) {
     this.event = {
-      id: e.event.extendedProps['id'],
-      title: e.event.title,
-      description: e.event.extendedProps['description'],
-      startDate: e.event.start,
-      endDate: e.event.end,
-      type: e.event.extendedProps['type'],
-      id_PlaceEventYoga: e.event.extendedProps['id_PlaceEventYoga'],
+      ...e.event.extendedProps
     };
     this.header = `Evènement à la date du ${this.event.startDate.toLocaleString()}`
     this.popupVisible = true;

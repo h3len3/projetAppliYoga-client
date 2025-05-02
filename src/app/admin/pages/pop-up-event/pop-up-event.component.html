@@ -54,30 +54,40 @@
     <input type="" id="" name=""> -->
   
   <!-- nouveau lieu -->
-  <div class = "newPlace">
+  <div class="newPlace" formGroupName="newPlaceEventYoga">
    @if (!form.get("id_PlaceEventYoga")?.value){
       <p><i class="pi pi-save"></i> Enregistrez un lieu</p>
       <p-float-label variant="on">
-        <input class="w-full" pInputText formControlName="nameAddresse" />
+        <input class="w-full" pInputText formControlName="name" />
         <label>Nom : </label>
       </p-float-label>
-      <p-float-label variant="on">
-        <input class="w-full" pInputText formControlName="Street" />
-        <label>rue : </label>
-      </p-float-label>
-      <p-float-label variant="on">
-        <input class="w-full" pInputText formControlName="numberStreet" />
-        <label>numéro : </label>
-      </p-float-label>
-      <p-float-label variant="on">
-        <input class="w-full" pInputText formControlName="zipCode" />
-        <label>Code postal : </label>
-      </p-float-label>
-      <p-float-label variant="on">
-        <input class="w-full" pInputText formControlName="country" />
-        <label>Pays: </label>
-      </p-float-label>
+      <div formGroupName="address"> 
+        <p-float-label variant="on">
+          <input class="w-full" pInputText formControlName="street" />
+          <label>rue : </label>
+        </p-float-label>
+        <p-float-label variant="on">
+          <input class="w-full" pInputText formControlName="numberStreet" />
+          <label>numéro : </label>
+        </p-float-label>
+        <p-float-label variant="on">
+          <input class="w-full" pInputText formControlName="postalCode" />
+          <label>Code postal : </label>
+        </p-float-label>
+        <p-float-label variant="on">
+          <input class="w-full" pInputText formControlName="city" />
+          <label>Ville: </label>
+        </p-float-label>
+        <p-float-label variant="on">
+          <input class="w-full" pInputText formControlName="country" />
+          <label>Pays: </label>
+        </p-float-label>
+      </div>
     }
+    @else {
+      <p-button (onClick)="clearLocation()">Ajouter un nouveau lieu</p-button>
+    }
+
   </div>  
   </fieldset>  
   

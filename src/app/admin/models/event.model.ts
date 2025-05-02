@@ -1,3 +1,5 @@
+import { PlaceEventModel } from "./place-event.model"
+
 export interface EventModel {
     id: number,
     title: string,
@@ -6,6 +8,9 @@ export interface EventModel {
     endDate: string
     type : string,
     id_PlaceEventYoga: number,
+    placeName : string,
+    placeAddress : string
+    
     
 }
 

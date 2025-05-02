@@ -71,10 +71,25 @@ export class PopUpEventComponent implements OnChanges{
     startDate: [new Date(), [Validators.required]],
     endDate: [new Date(), [Validators.required]],
     type: ['', [Validators.required]],
-    id_PlaceEventYoga: [null, [Validators.required]],
+    id_PlaceEventYoga: [null],
     minSub : [10],
-    maxSub : [20]
+    maxSub : [20],
+    newPlaceEventYoga : this.formBuilder.group({
+      name : [''],
+      address : this.formBuilder.group({
+        street: [''],
+        numberStreet : [null],
+        city : [''],
+        postalCode: [''],
+        country : ['']
+
+      })
+
+
+    })
+    
   });
+
 
   constructor() {
     this.getEvent()
@@ -148,5 +163,9 @@ export class PopUpEventComponent implements OnChanges{
       }
     })
   }
+
+clearLocation(){
+  this.form.controls["id_PlaceEventYoga"].reset()
+}
 
 }
