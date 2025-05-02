@@ -45,15 +45,43 @@
 
   <!-- Choix entre lieu existant ou nouveau -->
   <fieldset>
-    <legend>Lieu :</legend>
-
-    <label for="">Lieu déjà enregistré :</label>
-    <p-select  appendTo="body" styleClass="w-full" formControlName="id_PlaceEventYoga" [options]="locations" optionLabel="name" optionValue="id"></p-select>
-    <!-- Id_PlaceEventYoga -->
-
+    <legend>Lieu - Choisissez un lieu enregistré ou enregistrez un nouveau lieu</legend>
+    <div class="placesSaved">
+      <label for=""><i class="pi pi-list"></i> Lieux déjà enregistrés :</label>
+      <p-select [showClear]="true" appendTo="body" styleClass="w-full" formControlName="id_PlaceEventYoga" [options]="locations" optionLabel="name" optionValue="id"></p-select>
+    </div>
     <!-- <label for="">Nouveau lieu (si non existant) :</label><br>
     <input type="" id="" name=""> -->
-  </fieldset>
+  
+  <!-- nouveau lieu -->
+  <div class = "newPlace">
+   @if (!form.get("id_PlaceEventYoga")?.value){
+      <p><i class="pi pi-save"></i> Enregistrez un lieu</p>
+      <p-float-label variant="on">
+        <input class="w-full" pInputText formControlName="nameAddresse" />
+        <label>Nom : </label>
+      </p-float-label>
+      <p-float-label variant="on">
+        <input class="w-full" pInputText formControlName="Street" />
+        <label>rue : </label>
+      </p-float-label>
+      <p-float-label variant="on">
+        <input class="w-full" pInputText formControlName="numberStreet" />
+        <label>numéro : </label>
+      </p-float-label>
+      <p-float-label variant="on">
+        <input class="w-full" pInputText formControlName="zipCode" />
+        <label>Code postal : </label>
+      </p-float-label>
+      <p-float-label variant="on">
+        <input class="w-full" pInputText formControlName="country" />
+        <label>Pays: </label>
+      </p-float-label>
+    }
+  </div>  
+  </fieldset>  
+  
+
   <br>
 
   <div class="pb-3 flex justify-content-end">
@@ -88,8 +116,9 @@
     <p-card header="👥 Personnes inscrites :" *ngIf="reservations.length > 0" styleClass="mb-3">
       <div *ngFor="let r of reservations" class="p-mb-2" style="border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
         <strong>{{ r.email }}</strong><br />
-        Réservé le : {{ r.dateReservation | date:'short' }}<br />
+        Réservé le :  {{ r.dateReservation | date: 'dd/MM/yyyy HH:mm' }}<br />    
         <!-- <p-tag [severity]="r.payed ? 'success' : 'danger'" [value]="r.payed ? 'Payé' : 'Non payé'"></p-tag> -->
+         <!-- TODO quand système paiement fait, gérer dynamiquement payé ou pas -->
         <p-tag 
           [value]="r.payed ? 'Payé' : 'Non payé'" 
           [styleClass]="r.payed ? 'tag-paid' : 'tag-unpaid'">
