@@ -20,3 +20,42 @@
     box-shadow: none !important;
   }
 
+// bouton ajouter lieu (plus doux)
+:host ::ng-deep .custom-add-button {
+  margin: 1rem 0;
+  display: inline-block;
+}
+
+:host ::ng-deep .custom-add-button .p-button {
+  background-color: #e1f4ef;
+  border: 1px solid #c7eae2;
+  color: #3c6e65;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+:host ::ng-deep .custom-add-button .p-button:hover {
+  background-color: #c7eae2;
+}
+
+// bouton enregistrer (inchangé)
+::ng-deep p-button[type="submit"] .p-button {
+  background-color: #8BC7B3 !important;
+  border: none;
+  color: black !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 900;
+}
+
+::ng-deep p-button[type="submit"] .p-button:hover {
+  background-color: #66aa94 !important;
+}
+
+
+
+
+ 
+
