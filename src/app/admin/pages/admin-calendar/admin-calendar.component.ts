@@ -33,14 +33,17 @@ import InteractionPlugin, {DateClickArg} from '@fullcalendar/interaction';
 // pour bulle au survol
 import tippy from 'tippy.js';
 
+// pour meilleure présentation date ds pop up du comp enfant
+import { DatePipe } from '@angular/common';
 
 @Component({
   imports: [CommonModule, FullCalendarModule,  PopUpEventComponent, DialogModule, Toast, ConfirmDialog],
   templateUrl: './admin-calendar.component.html',
   styleUrl: './admin-calendar.component.scss',
-
   selector: 'app-calendar',
   standalone: true,
+  // pour prés date dans popup : 
+  providers: [DatePipe],
 })
 export class AdminCalendarComponent {
 
@@ -95,10 +98,15 @@ export class AdminCalendarComponent {
 
   //k : 
   events!: EventInput[];
-  //k:
-   constructor() {
-     this.loadEvents()
-   }
+
+  // pour présentation date ds popup
+  constructor(private datePipe: DatePipe) {
+    this.loadEvents()
+  }
+  // //k:
+  //  constructor() {
+  //    this.loadEvents()
+  //  }
 //avt:
   //  constructor() {
   //    this.eventService.getAll().subscribe(data => this.events = data.map(e => ({
@@ -158,7 +166,16 @@ export class AdminCalendarComponent {
     this.event = {
       ...e.event.extendedProps
     };
-    this.header = `Evènement à la date du ${this.event.startDate.toLocaleString()}`
+    // this.header = `Evènement à la date du ${this.event.startDate.toLocaleString()}`
+    const start = new Date(this.event.startDate);
+    const end = new Date(this.event.endDate);
+
+    const date = this.datePipe.transform(start, 'dd/MM/yyyy');
+    const heureDebut = this.datePipe.transform(start, 'HH:mm');
+    const heureFin = this.datePipe.transform(end, 'HH:mm');
+
+    this.header = `Évènement le ${date} de ${heureDebut} à ${heureFin}`;
+
     this.popupVisible = true;
     
   }
